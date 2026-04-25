@@ -6,7 +6,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite"
+    "start": "vite",
+    "predeploy": "npm run build && cp build/client/index.html build/client/404.html",
+    "deploy": "gh-pages -d build/client"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
-    "vite": "^5.4.21"
+    "gh-pages": "^6.3.0",
+    "vite": "^8.0.10"
   }
 }
