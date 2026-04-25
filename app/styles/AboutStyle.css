@@ -1,0 +1,10 @@
+.about_page_section {
+  padding-top: 100px;
+}
+.about_text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.about_values h4 {
+  font-family: var(--oswald-font);
+}

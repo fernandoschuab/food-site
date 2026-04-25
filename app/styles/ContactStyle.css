@@ -1,0 +1,11 @@
+.contact_page_section {
+  padding-top: 100px;
+}
+.contact_form_wrapper {
+  border: 1px solid var(--light-grey-2);
+}
+.contact_form_wrapper label {
+  font-family: var(--oswald-font);
+  text-transform: uppercase;
+  color: var(--grey);
+}

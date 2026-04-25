@@ -1,0 +1,9 @@
+.shop_page_section {
+  padding-top: 100px;
+}
+.shop_summary {
+  border: 1px solid var(--light-grey-2);
+}
+.shop_summary h4 {
+  font-family: var(--oswald-font);
+}

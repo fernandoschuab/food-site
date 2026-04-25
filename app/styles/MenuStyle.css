@@ -1,0 +1,8 @@
+.menu_page_section {
+  padding-top: 100px;
+}
+.menu_filters button {
+  font-family: var(--oswald-font);
+  font-weight: 500;
+  text-transform: uppercase;
+}
