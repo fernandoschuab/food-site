@@ -13,7 +13,6 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate submission
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);

@@ -1,17 +1,23 @@
 import React from "react";
-import { Col, Card } from "react-bootstrap";
+import { Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
-function Cards({ image, rating, title, paragraph, price, renderRatingIcons }) {
+function Cards({ id, image, rating, title, paragraph, price, renderRatingIcons }) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    addToCart({ id, name: title, price: price });
+  };
+
   return (
     <Col sm={6} lg={4} xl={3} className="mb-4">
-      {/* Adicionei h-100 para o Card ocupar toda a altura da Col */}
       <Card className="overflow-hidden h-100">
         <div className="overflow-hidden">
           <Card.Img variant="top" src={image} />
         </div>
         
-        {/* Transformei o Body em um container Flex e coluna */}
         <Card.Body className="d-flex flex-column">
           <div className="d-flex align-items-center justify-content-between">
             <div className="item_rating">{renderRatingIcons(rating)}</div>
@@ -22,7 +28,6 @@ function Cards({ image, rating, title, paragraph, price, renderRatingIcons }) {
 
           <Card.Title>{title}</Card.Title>
           
-          {/* O segredo está aqui: flex-grow-1 faz este campo ocupar todo o espaço sobrando */}
           <Card.Text className="flex-grow-1">
             {paragraph}
           </Card.Text>
@@ -32,10 +37,10 @@ function Cards({ image, rating, title, paragraph, price, renderRatingIcons }) {
               <h5 className="mb-0">R${Number(price).toFixed(2).replace('.', ',')}</h5>
             </div>
             <div className="add_to_card">
-              <Link to="/">
+              <Button variant="link" className="p-0 text-decoration-none" onClick={handleAddToCart}>
                 <i className="bi bi-bag me-2"></i>
                 Adicionar
-              </Link>
+              </Button>
             </div>
           </div>
         </Card.Body>

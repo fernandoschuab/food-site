@@ -115,6 +115,7 @@ function Section3() {
           {mockData.map((cardData, index) => (
             <Cards
               key={index}
+              id={cardData.id}
               image={cardData.image}
               rating={cardData.rating}
               title={cardData.title}

@@ -7,7 +7,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 
+import { CartProvider } from "./context/CartContext.jsx";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <CartProvider>
+    <App />
+  </CartProvider>
+);
 
 reportWebVitals();

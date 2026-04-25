@@ -3,10 +3,12 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../assets/logo/logo.png";
 import "../../styles/HeaderStyle.css";
+import { useCart } from "../../context/CartContext";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
   const location = useLocation();
+  const { totalItems } = useCart();
 
   const changeValueOnScroll = () => {
     const scrollValue = document?.documentElement?.scrollTop;
@@ -52,10 +54,10 @@ const Header = () => {
               <Nav.Link as={Link} to="/contact">
                 Contato
               </Nav.Link>
-              <Nav.Link as={Link} to="/">
+              <Nav.Link as={Link} to="/shop">
                 <div className="cart">
                   <i className="bi bi-bag fs-5"></i>
-                  <em className="roundpoint">2</em>
+                  {totalItems > 0 && <em className="roundpoint">{totalItems}</em>}
                 </div>
               </Nav.Link>
             </Nav>

@@ -1,29 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import Layout from "../../components/Layouts/Layout";
+import { useCart } from "../../context/CartContext";
 import "../../styles/ShopStyle.css";
 
 const Shop = () => {
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: "Crispy Chicken", price: 34.90, quantity: 1 },
-    { id: 2, name: "Ultimate Bacon", price: 38.50, quantity: 2 }
-  ]);
-
-  const updateQuantity = (id, delta) => {
-    setCartItems(cartItems.map(item => {
-      if (item.id === id) {
-        const newQuantity = Math.max(1, item.quantity + delta);
-        return { ...item, quantity: newQuantity };
-      }
-      return item;
-    }));
-  };
-
-  const removeItem = (id) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
-  };
-
-  const total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  const { cartItems, updateQuantity, removeItem, subTotal } = useCart();
 
   return (
     <Layout>
@@ -76,16 +58,16 @@ const Shop = () => {
                 <h4 className="text-uppercase mb-4">Resumo do Pedido</h4>
                 <div className="d-flex justify-content-between mb-3">
                   <span>Subtotal:</span>
-                  <span>R$ {total.toFixed(2).replace('.', ',')}</span>
+                  <span>R$ {subTotal.toFixed(2).replace('.', ',')}</span>
                 </div>
                 <div className="d-flex justify-content-between mb-3">
                   <span>Taxa de Entrega:</span>
-                  <span>R$ 5,00</span>
+                  <span>R$ {subTotal > 0 ? "5,00" : "0,00"}</span>
                 </div>
                 <hr />
                 <div className="d-flex justify-content-between mb-4">
                   <strong>Total:</strong>
-                  <strong>R$ {(total > 0 ? total + 5 : 0).toFixed(2).replace('.', ',')}</strong>
+                  <strong>R$ {(subTotal > 0 ? subTotal + 5 : 0).toFixed(2).replace('.', ',')}</strong>
                 </div>
                 <Button variant="warning" className="w-100 rounded-0 text-uppercase fw-bold" disabled={cartItems.length === 0}>
                   Finalizar Compra
