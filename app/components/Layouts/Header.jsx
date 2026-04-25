@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo/logo.png";
@@ -7,13 +7,17 @@ import "../../styles/HeaderStyle.css";
 const Header = () => {
   const [nav, setNav] = useState(false);
 
-  // Scroll Navbar
   const changeValueOnScroll = () => {
     const scrollValue = document?.documentElement?.scrollTop;
     scrollValue > 100 ? setNav(true) : setNav(false);
   };
 
-  window.addEventListener("scroll", changeValueOnScroll);
+  useEffect(() => {
+    window.addEventListener("scroll", changeValueOnScroll);
+    return () => {
+      window.removeEventListener("scroll", changeValueOnScroll);
+    };
+  }, []);
 
   return (
     <header>
@@ -23,10 +27,8 @@ const Header = () => {
         className={`${nav === true ? "sticky" : ""}`}
       >
         <Container>
-          <Navbar.Brand href="#home">
-            <Link to="/" className="logo">
+          <Navbar.Brand as={Link} to="/" className="logo">
               <img src={Logo} alt="Logo" className="img-fluid" />
-            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -51,7 +53,7 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link as={Link} to="/">
                 <div className="cart">
-                  <i class="bi bi-bag fs-5"></i>
+                  <i className="bi bi-bag fs-5"></i>
                   <em className="roundpoint">2</em>
                 </div>
               </Nav.Link>
